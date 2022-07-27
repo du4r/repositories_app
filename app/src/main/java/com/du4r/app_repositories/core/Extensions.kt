@@ -2,11 +2,11 @@ package com.du4r.app_repositories.core
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 
@@ -22,7 +22,7 @@ fun View.hideSoftKeyBoard() {
     imm.hideSoftInputFromWindow(windowToken,0)
 }
 
-fun Context.createDialog(block: MaterialAlertDialogBuilder.() -> Unit = {}): AlertDialog{
+fun Context.createDialog(block: MaterialAlertDialogBuilder.() -> Unit = {}): AlertDialog {
     val builder = MaterialAlertDialogBuilder(this)
     builder.setPositiveButton(android.R.string.ok, null)
     block(builder)
