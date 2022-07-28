@@ -28,6 +28,7 @@ object DataModule {
        Log.e(OK_HTTP, it)
       }
       interceptor.level = HttpLoggingInterceptor.Level.BODY
+
       OkHttpClient.Builder()
        .addInterceptor(interceptor)
        .build()

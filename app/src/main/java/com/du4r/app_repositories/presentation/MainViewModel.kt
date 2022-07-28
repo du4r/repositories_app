@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.du4r.app_repositories.data.model.Repo
 import com.du4r.app_repositories.domain.ListUserRepositoriesUseCase
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val listUserRepositoriesUse: ListUserRepositoriesUseCase
+    private val listUserRepositoriesUseCase: ListUserRepositoriesUseCase
 ) : ViewModel() {
 
     private val _repos = MutableLiveData<State>()
@@ -19,14 +21,14 @@ class MainViewModel(
 
     fun getRepoList(user: String){
         viewModelScope.launch{
-            listUserRepositoriesUse(user)
+            listUserRepositoriesUseCase(user)
                 .onStart{
                  _repos.postValue(State.Loading)
                 }
                 .catch{
                 _repos.postValue(State.Error(it))
                 }
-                .collect{
+                .collectLatest{
                 _repos.postValue(State.Success(it))
                 }
         }
